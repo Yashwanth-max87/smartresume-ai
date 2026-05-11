@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartResume AI — Resume Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+</head>
+<body class="flex min-h-screen">
+<aside class="w-64 min-h-screen flex flex-col p-5 gap-2 flex-shrink-0" style="background:#0d0d1a;border-right:1px solid #1e1e30;">
+  <div class="mb-6 mt-2 flex items-center gap-3">
+    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;"><span>✦</span></div>
+    <div><div class="font-bold text-white">SmartResume</div><div class="text-xs" style="color:#6366f1;">AI Powered</div></div>
+  </div>
+  <nav class="flex flex-col gap-1">
+    <a href="index.html" class="nav-link">&#9635; Dashboard</a>
+    <a href="builder.html" class="nav-link active">&#9998; Resume Builder</a>
+    <a href="templates.html" class="nav-link">&#9635; Templates</a>
+    <a href="skill-analyzer.html" class="nav-link">&#9650; Skill Analyzer</a>
+    <a href="roadmap.html" class="nav-link">&#9776; Skill Roadmap</a>
+  </nav>
+</aside>
+
+<div class="flex flex-1 overflow-hidden" style="max-height:100vh;">
+  <!-- Form Panel -->
+  <div class="flex flex-col overflow-y-auto p-6" style="width:480px;flex-shrink:0;border-right:1px solid #1e1e30;">
+    <div class="flex items-center justify-between mb-5">
+      <div><h1 class="text-xl font-bold text-white">Resume Builder</h1><p class="text-xs mt-0.5" style="color:#94a3b8;">Fill in the sections below</p></div>
+      <div class="flex gap-2">
+        <button id="btn-save" class="btn-secondary" style="padding:8px 14px;font-size:13px;">Save</button>
+        <button id="btn-download" class="btn-primary" style="padding:8px 14px;font-size:13px;">&#8595; PDF</button>
+      </div>
+    </div>
+
+    <div class="glass p-4 mb-4" style="border-radius:12px;">
+      <div class="flex gap-4 items-center">
+        <div class="flex-1">
+          <label class="text-xs font-semibold mb-1 block" style="color:#94a3b8;">TEMPLATE</label>
+          <select id="template-select" class="input-field" style="padding:8px 12px;">
+            <option value="modern">Modern</option>
+            <option value="minimal">Minimal</option>
+            <option value="ats_professional">ATS Professional</option>
+            <option value="two_column">Two-Column Technical</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-semibold mb-1 block" style="color:#94a3b8;">ACCENT</label>
+          <input type="color" id="accent-color" value="#6366f1" style="width:44px;height:38px;border-radius:8px;border:1px solid #2a2a40;cursor:pointer;background:transparent;padding:2px;"/>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .tab-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;border:none;cursor:pointer;background:transparent;color:#94a3b8;transition:all 0.2s;}
+      .tab-btn:hover{background:rgba(255,255,255,0.06);color:#e2e8f0;}
+      .tab-btn.active-tab{background:rgba(99,102,241,0.2);color:#818cf8;}
+      .section-label{font-size:12px;font-weight:600;color:#94a3b8;margin-bottom:4px;display:block;}
+    </style>
+    <div class="flex gap-1 mb-4 flex-wrap" style="border-bottom:1px solid #1e1e30;padding-bottom:10px;">
+      <button class="tab-btn active-tab" data-tab="personal">Personal</button>
+      <button class="tab-btn" data-tab="experience">Experience</button>
+      <button class="tab-btn" data-tab="education">Education</button>
+      <button class="tab-btn" data-tab="skills">Skills</button>
+      <button class="tab-btn" data-tab="projects">Projects</button>
+      <button class="tab-btn" data-tab="extras">Extras</button>
+    </div>
+
+    <div id="tab-personal" class="tab-content space-y-3">
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="section-label">Full Name *</label><input id="f-name" class="input-field" placeholder="Jane Doe"/></div>
+        <div><label class="section-label">Job Title</label><input id="f-title" class="input-field" placeholder="Full Stack Developer"/></div>
+        <div><label class="section-label">Email *</label><input id="f-email" type="email" class="input-field" placeholder="jane@email.com"/></div>
+        <div><label class="section-label">Phone</label><input id="f-phone" class="input-field" placeholder="+1 234 567 8900"/></div>
+        <div><label class="section-label">Location</label><input id="f-location" class="input-field" placeholder="New York, USA"/></div>
+        <div><label class="section-label">LinkedIn</label><input id="f-linkedin" class="input-field" placeholder="linkedin.com/in/..."/></div>
+        <div><label class="section-label">GitHub</label><input id="f-github" class="input-field" placeholder="github.com/..."/></div>
+        <div><label class="section-label">Portfolio</label><input id="f-portfolio" class="input-field" placeholder="yoursite.com"/></div>
+      </div>
+      <div><label class="section-label">Professional Summary</label>
+        <textarea id="f-summary" class="input-field" rows="4" placeholder="Write 2-3 sentences about your expertise…"></textarea>
+      </div>
+    </div>
+
+    <div id="tab-experience" class="tab-content hidden space-y-4">
+      <div id="experience-list" class="space-y-4"></div>
+      <button id="add-experience" class="btn-secondary w-full" style="font-size:13px;">+ Add Experience</button>
+    </div>
+
+    <div id="tab-education" class="tab-content hidden space-y-4">
+      <div id="education-list" class="space-y-4"></div>
+      <button id="add-education" class="btn-secondary w-full" style="font-size:13px;">+ Add Education</button>
+    </div>
+
+    <div id="tab-skills" class="tab-content hidden">
+      <label class="section-label mb-2">Skills (Enter or comma to add)</label>
+      <div id="skill-chips" class="flex flex-wrap gap-2 mb-3 p-3 rounded-xl" style="background:rgba(255,255,255,0.03);border:1px solid #2a2a40;min-height:60px;"></div>
+      <input id="skill-input" class="input-field" placeholder="e.g. Python, React, Docker"/>
+    </div>
+
+    <div id="tab-projects" class="tab-content hidden space-y-4">
+      <div id="project-list" class="space-y-4"></div>
+      <button id="add-project" class="btn-secondary w-full" style="font-size:13px;">+ Add Project</button>
+    </div>
+
+    <div id="tab-extras" class="tab-content hidden space-y-4">
+      <div><label class="section-label">Certifications</label><div id="cert-list" class="space-y-3 mb-3"></div>
+        <button id="add-cert" class="btn-secondary" style="font-size:12px;padding:6px 14px;">+ Add Cert</button></div>
+      <div><label class="section-label">Languages (comma-separated)</label>
+        <input id="f-languages" class="input-field" placeholder="English, Spanish"/></div>
+      <div><label class="section-label">Achievements (one per line)</label>
+        <textarea id="f-achievements" class="input-field" rows="4" placeholder="AWS Certified&#10;Top 5% on LeetCode"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview Panel -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex items-center justify-between p-4" style="border-bottom:1px solid #1e1e30;">
+      <div class="text-sm font-semibold text-white">Live Preview</div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs" style="color:#94a3b8;">Zoom</span>
+        <input type="range" id="zoom-slider" min="50" max="100" value="75" style="width:100px;accent-color:#6366f1;"/>
+        <span id="zoom-label" class="text-xs" style="color:#94a3b8;">75%</span>
+      </div>
+    </div>
+    <div class="flex-1 overflow-auto p-6" style="background:#111122;">
+      <div id="preview-wrapper" style="transform-origin:top center;transition:transform 0.2s;">
+        <div id="resume-preview" style="margin:0 auto;max-width:794px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/builder.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartResume AI — Skill Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+</head>
+<body class="flex min-h-screen">
+<aside class="w-64 min-h-screen flex flex-col p-5 gap-2 flex-shrink-0" style="background:#0d0d1a;border-right:1px solid #1e1e30;">
+  <div class="mb-6 mt-2 flex items-center gap-3">
+    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;"><span>✦</span></div>
+    <div><div class="font-bold text-white">SmartResume</div><div class="text-xs" style="color:#6366f1;">AI Powered</div></div>
+  </div>
+  <nav class="flex flex-col gap-1">
+    <a href="index.html" class="nav-link">&#9635; Dashboard</a>
+    <a href="builder.html" class="nav-link">&#9998; Resume Builder</a>
+    <a href="templates.html" class="nav-link">&#9635; Templates</a>
+    <a href="skill-analyzer.html" class="nav-link">&#9650; Skill Analyzer</a>
+    <a href="roadmap.html" class="nav-link active">&#9776; Skill Roadmap</a>
+  </nav>
+</aside>
+
+<main class="flex-1 p-8 overflow-auto">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-white mb-1">Skill <span class="gradient-text">Roadmap</span></h1>
+    <p style="color:#94a3b8;">Generate a personalized AI learning roadmap with YouTube resources.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Input Form -->
+    <div class="glass p-6 fade-in" style="border-radius:16px;">
+      <h2 class="text-base font-bold text-white mb-4">Generate Roadmap</h2>
+      <div class="mb-4">
+        <label class="text-xs font-semibold mb-1 block" style="color:#94a3b8;">TARGET ROLE *</label>
+        <input id="rd-role" class="input-field" placeholder="e.g. Full Stack Developer"/>
+      </div>
+      <div class="mb-4">
+        <label class="text-xs font-semibold mb-1 block" style="color:#94a3b8;">YOUR CURRENT SKILLS</label>
+        <div id="rd-skill-chips" class="flex flex-wrap gap-2 mb-2 p-3 rounded-xl" style="background:rgba(255,255,255,0.03);border:1px solid #2a2a40;min-height:50px;"></div>
+        <input id="rd-skill-input" class="input-field" placeholder="Type a skill and press Enter"/>
+      </div>
+      <button id="rd-generate-btn" class="btn-primary w-full" style="padding:12px;">Generate Roadmap</button>
+
+      <!-- History -->
+      <div class="mt-6">
+        <div class="text-xs font-semibold mb-3" style="color:#94a3b8;">RECENT ROADMAPS</div>
+        <div id="roadmap-history" class="space-y-2">
+          <div class="text-xs" style="color:#555;">No history yet</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap Output -->
+    <div class="lg:col-span-2 space-y-5">
+      <div id="roadmap-placeholder" class="glass p-12 text-center fade-in" style="border-radius:16px;">
+        <svg width="56" height="56" fill="none" stroke="#6366f1" stroke-width="1" viewBox="0 0 24 24" style="margin:0 auto 16px;opacity:0.5;"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        <p class="text-white font-semibold mb-2">Your roadmap will appear here</p>
+        <p class="text-sm" style="color:#94a3b8;">Enter your target role and current skills to get started.</p>
+      </div>
+
+      <!-- Roadmap Summary -->
+      <div id="roadmap-summary" class="glass p-5 hidden fade-in" style="border-radius:16px;">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <div id="rm-role-title" class="text-lg font-bold text-white"></div>
+            <div id="rm-duration" class="text-sm mt-1" style="color:#94a3b8;"></div>
+          </div>
+          <div class="flex gap-3">
+            <div class="text-center">
+              <div id="rm-missing-count" class="text-2xl font-bold" style="color:#f87171;">0</div>
+              <div class="text-xs" style="color:#94a3b8;">To Learn</div>
+            </div>
+          </div>
+        </div>
+        <!-- Phase badges -->
+        <div id="rm-phase-badges" class="flex gap-3 mt-4 flex-wrap"></div>
+      </div>
+
+      <!-- Phase Cards -->
+      <div id="phase-beginner" class="glass p-5 hidden fade-in" style="border-radius:16px;border-left:3px solid #4ade80;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip chip-green">Phase 1</span>
+          <span class="font-bold text-white">Foundation</span>
+          <span id="beg-duration" class="text-xs ml-auto" style="color:#94a3b8;"></span>
+        </div>
+        <p class="text-sm mb-3" style="color:#94a3b8;" id="beg-desc"></p>
+        <div id="beg-skills" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div id="phase-intermediate" class="glass p-5 hidden fade-in" style="border-radius:16px;border-left:3px solid #fbbf24;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip chip-amber">Phase 2</span>
+          <span class="font-bold text-white">Building Skills</span>
+          <span id="int-duration" class="text-xs ml-auto" style="color:#94a3b8;"></span>
+        </div>
+        <p class="text-sm mb-3" style="color:#94a3b8;" id="int-desc"></p>
+        <div id="int-skills" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div id="phase-advanced" class="glass p-5 hidden fade-in" style="border-radius:16px;border-left:3px solid #818cf8;">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="chip chip-blue">Phase 3</span>
+          <span class="font-bold text-white">Expert Level</span>
+          <span id="adv-duration" class="text-xs ml-auto" style="color:#94a3b8;"></span>
+        </div>
+        <p class="text-sm mb-3" style="color:#94a3b8;" id="adv-desc"></p>
+        <div id="adv-skills" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Weekly Plan -->
+      <div id="weekly-plan-card" class="glass p-5 hidden fade-in" style="border-radius:16px;">
+        <h3 class="font-bold text-white mb-4">12-Week Plan</h3>
+        <div id="weekly-plan" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+      </div>
+
+      <!-- YouTube Resources -->
+      <div id="youtube-card" class="glass p-5 hidden fade-in" style="border-radius:16px;">
+        <h3 class="font-bold text-white mb-4">&#9654; YouTube Learning Resources</h3>
+        <div id="youtube-list" class="space-y-4"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/roadmap.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartResume AI — Skill Analyzer</title>
+  <meta name="description" content="Rule-based skill gap analyzer — compare your skills against industry roles and get a personalized roadmap."/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+</head>
+<body class="flex min-h-screen">
+
+<!-- Sidebar -->
+<aside class="w-64 min-h-screen flex flex-col p-5 gap-2 flex-shrink-0" style="background:#0d0d1a;border-right:1px solid #1e1e30;">
+  <div class="mb-6 mt-2 flex items-center gap-3">
+    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;"><span style="font-size:18px;">✦</span></div>
+    <div><div class="font-bold text-white">SmartResume</div><div class="text-xs" style="color:#6366f1;">AI Powered</div></div>
+  </div>
+  <nav class="flex flex-col gap-1 flex-1">
+    <a href="index.html" class="nav-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="builder.html" class="nav-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Resume Builder
+    </a>
+    <a href="templates.html" class="nav-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Templates
+    </a>
+    <a href="skill-analyzer.html" class="nav-link active">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Skill Analyzer
+    </a>
+    <a href="roadmap.html" class="nav-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      Skill Roadmap
+    </a>
+  </nav>
+  <div class="glass p-4" style="border-radius:12px;">
+    <div class="text-xs font-semibold mb-1" style="color:#6366f1;">RULE-BASED ENGINE</div>
+    <div class="text-sm font-medium text-white">No API Key Needed</div>
+    <div class="text-xs mt-1" style="color:#94a3b8;">Enter your skills and see how you match the industry standard.</div>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="flex-1 p-8 overflow-auto">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-white mb-1">Skill <span class="gradient-text">Analyzer & ATS Score</span></h1>
+    <p style="color:#94a3b8;">No API Key needed. Enter your skills and see how you match the industry standard.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- Input Panel -->
+    <div class="space-y-5">
+
+      <!-- Step 1: Skills -->
+      <div class="glass p-6 fade-in" style="border-radius:16px;">
+        <h2 class="text-sm font-bold mb-3" style="color:#94a3b8;letter-spacing:0.06em;">1. ENTER YOUR SKILLS</h2>
+        <div id="skill-chips" class="flex flex-wrap gap-2 mb-3 p-3 rounded-xl min-h-[52px]" style="background:rgba(255,255,255,0.03);border:1px solid #2a2a40;"></div>
+        <input id="skill-input" class="input-field" placeholder="Type a skill and press Enter…"/>
+        <p class="text-xs mt-2" style="color:#555;">Press <kbd style="background:#2a2a40;padding:2px 6px;border-radius:4px;color:#94a3b8;">Enter</kbd> to add · Click chip to remove</p>
+      </div>
+
+      <!-- Step 2: Role -->
+      <div class="glass p-6 fade-in" style="border-radius:16px;animation-delay:0.1s;">
+        <h2 class="text-sm font-bold mb-4" style="color:#94a3b8;letter-spacing:0.06em;">2. TARGET ROLE</h2>
+        <div class="grid grid-cols-2 gap-3" id="role-buttons">
+          <button class="role-btn" data-role="Frontend Developer">Frontend Developer</button>
+          <button class="role-btn" data-role="Backend Developer">Backend Developer</button>
+          <button class="role-btn" data-role="Full Stack Developer">Full Stack Developer</button>
+          <button class="role-btn" data-role="Java Developer">Java Developer</button>
+          <button class="role-btn" data-role="Data Analyst">Data Analyst</button>
+          <button class="role-btn" data-role="Data Scientist">Data Scientist</button>
+          <button class="role-btn" data-role="DevOps Engineer">DevOps Engineer</button>
+          <button class="role-btn" data-role="Machine Learning Engineer">ML Engineer</button>
+        </div>
+      </div>
+
+      <!-- Analyze Button -->
+      <button id="analyze-btn" class="btn-primary w-full fade-in" style="padding:14px;font-size:15px;animation-delay:0.2s;">
+        Analyze Match Score
+      </button>
+    </div>
+
+    <!-- Results Panel -->
+    <div class="space-y-4">
+
+      <!-- Placeholder -->
+      <div id="results-placeholder" class="glass p-12 text-center fade-in" style="border-radius:16px;">
+        <svg width="56" height="56" fill="none" stroke="#6366f1" stroke-width="1" viewBox="0 0 24 24" style="margin:0 auto 16px;opacity:0.4;"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        <p class="text-white font-semibold mb-2">No Analysis Yet</p>
+        <p class="text-sm" style="color:#94a3b8;">Add your skills, pick a role, and click Analyze.</p>
+      </div>
+
+      <!-- Score Ring -->
+      <div id="score-card" class="glass p-6 hidden fade-in" style="border-radius:16px;">
+        <div class="flex items-center gap-6">
+          <div style="position:relative;width:110px;height:110px;flex-shrink:0;">
+            <svg viewBox="0 0 36 36" width="110" height="110" style="transform:rotate(-90deg);">
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1e1e30" stroke-width="3"/>
+              <circle id="score-circle" cx="18" cy="18" r="15.9" fill="none" stroke="#6366f1" stroke-width="3"
+                stroke-dasharray="0 100" stroke-linecap="round" style="transition:stroke-dasharray 1s ease;"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <span id="score-pct" class="text-2xl font-bold text-white">0%</span>
+              <span class="text-xs" style="color:#94a3b8;">MATCH</span>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div id="score-verdict" class="text-base font-bold text-white mb-2"></div>
+            <div class="space-y-2">
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+                <span style="color:#94a3b8;width:90px;">Skills Match</span>
+                <div class="progress-bar flex-1"><div id="bar-match" class="progress-fill" style="width:0%;"></div></div>
+                <span id="lbl-match" style="color:#6366f1;width:36px;text-align:right;"></span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+                <span style="color:#94a3b8;width:90px;">Coverage</span>
+                <div class="progress-bar flex-1"><div id="bar-cov" class="progress-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,#7c3aed);"></div></div>
+                <span id="lbl-cov" style="color:#a78bfa;width:36px;text-align:right;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matching Skills -->
+      <div id="matching-card" class="glass p-5 hidden fade-in" style="border-radius:16px;">
+        <h3 class="text-sm font-bold text-white mb-3">✓ Matching Keywords</h3>
+        <div id="matching-list" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Missing Skills -->
+      <div id="missing-card" class="glass p-5 hidden fade-in" style="border-radius:16px;">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-bold text-white">⚠ Missing Critical Skills</h3>
+          <span id="missing-count" class="chip chip-red" style="font-size:11px;"></span>
+        </div>
+        <div id="missing-list" class="flex flex-wrap gap-2 mb-4"></div>
+        <button id="goto-roadmap-btn" class="btn-primary w-full" style="padding:11px;font-size:13px;">
+          🗺 View Learning Roadmap
+        </button>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<style>
+.role-btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #2a2a40;
+  background: rgba(255,255,255,0.04);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.role-btn:hover { border-color: #6366f1; color: #e2e8f0; background: rgba(99,102,241,0.08); }
+.role-btn.selected { border-color: #6366f1; background: rgba(99,102,241,0.2); color: #818cf8; font-weight: 600; }
+</style>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/skill-analyzer.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartResume AI — Templates</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+</head>
+<body class="flex min-h-screen">
+<aside class="w-64 min-h-screen flex flex-col p-5 gap-2 flex-shrink-0" style="background:#0d0d1a;border-right:1px solid #1e1e30;">
+  <div class="mb-6 mt-2 flex items-center gap-3">
+    <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;"><span>✦</span></div>
+    <div><div class="font-bold text-white">SmartResume</div><div class="text-xs" style="color:#6366f1;">AI Powered</div></div>
+  </div>
+  <nav class="flex flex-col gap-1">
+    <a href="index.html" class="nav-link">&#9635; Dashboard</a>
+    <a href="builder.html" class="nav-link">&#9998; Resume Builder</a>
+    <a href="templates.html" class="nav-link active">&#9635; Templates</a>
+    <a href="skill-analyzer.html" class="nav-link">&#9650; Skill Analyzer</a>
+    <a href="roadmap.html" class="nav-link">&#9776; Skill Roadmap</a>
+  </nav>
+</aside>
+
+<main class="flex-1 p-8 overflow-auto">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-white mb-1">Resume <span class="gradient-text">Templates</span></h1>
+    <p style="color:#94a3b8;">Choose a professional template to get started. All templates are ATS-compatible.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+    <!-- Modern -->
+    <div class="glass template-card cursor-pointer hover:border-indigo-500 transition-all fade-in" data-template="modern" style="border-radius:16px;border:2px solid rgba(99,102,241,0.15);overflow:hidden;">
+      <div style="height:220px;background:linear-gradient(135deg,#1a1a3e 0%,#2d2d6b 100%);position:relative;overflow:hidden;">
+        <!-- Mini preview -->
+        <div style="position:absolute;inset:16px;background:white;border-radius:8px;padding:14px;font-size:6px;color:#111;line-height:1.4;overflow:hidden;">
+          <div style="background:#6366f1;height:32px;margin:-14px -14px 8px;display:flex;align-items:center;padding:0 10px;">
+            <div>
+              <div style="color:white;font-weight:700;font-size:8px;">JANE DOE</div>
+              <div style="color:#c0c0ff;font-size:6px;">Full Stack Developer</div>
+            </div>
+          </div>
+          <div style="border-bottom:1px solid #6366f1;padding-bottom:3px;margin-bottom:4px;font-weight:700;font-size:7px;color:#6366f1;">EXPERIENCE</div>
+          <div style="font-weight:600;font-size:6.5px;">Senior Dev @ TechCorp</div>
+          <div style="color:#888;font-size:6px;">2022 – Present</div>
+          <div style="font-size:6px;margin-top:2px;">Led development of microservices...</div>
+          <div style="border-bottom:1px solid #6366f1;padding-bottom:3px;margin:6px 0 4px;font-weight:700;font-size:7px;color:#6366f1;">SKILLS</div>
+          <div style="font-size:6px;">React • Node.js • PostgreSQL • Docker</div>
+        </div>
+        <div style="position:absolute;bottom:12px;right:12px;background:rgba(99,102,241,0.9);color:white;font-size:9px;padding:4px 10px;border-radius:20px;font-weight:600;">MODERN</div>
+      </div>
+      <div class="p-5">
+        <h3 class="font-bold text-white text-base mb-1">Modern</h3>
+        <p class="text-xs mb-4" style="color:#94a3b8;">Bold header with accent color bar. Great for tech and creative roles.</p>
+        <div class="flex gap-2">
+          <span class="chip chip-blue">ATS Friendly</span>
+          <span class="chip chip-green">Popular</span>
+        </div>
+        <button class="btn-primary w-full mt-4" onclick="selectTemplate('modern')">Use Template</button>
+      </div>
+    </div>
+
+    <!-- Minimal -->
+    <div class="glass template-card cursor-pointer hover:border-purple-500 transition-all fade-in" data-template="minimal" style="border-radius:16px;border:2px solid rgba(167,139,250,0.15);overflow:hidden;animation-delay:0.1s;">
+      <div style="height:220px;background:linear-gradient(135deg,#1a1a3e 0%,#2d2d6b 100%);position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:16px;background:white;border-radius:8px;padding:14px;font-size:6px;color:#111;line-height:1.4;overflow:hidden;">
+          <div style="font-weight:800;font-size:11px;color:#111;margin-bottom:2px;">JANE DOE</div>
+          <div style="color:#555;font-size:7px;margin-bottom:6px;">Full Stack Developer</div>
+          <div style="color:#888;font-size:6px;border-bottom:1px solid #eee;padding-bottom:4px;margin-bottom:5px;">jane@email.com · +1234567 · New York</div>
+          <div style="font-weight:700;font-size:7px;color:#7c3aed;letter-spacing:0.05em;margin-bottom:3px;">EXPERIENCE</div>
+          <div style="font-weight:600;font-size:6.5px;">Senior Dev · TechCorp</div>
+          <div style="color:#888;font-size:6px;">2022 – Present · Led microservices…</div>
+          <div style="font-weight:700;font-size:7px;color:#7c3aed;margin:5px 0 3px;">SKILLS</div>
+          <div style="font-size:6px;">Python · React · Docker · AWS</div>
+        </div>
+        <div style="position:absolute;bottom:12px;right:12px;background:rgba(124,58,237,0.9);color:white;font-size:9px;padding:4px 10px;border-radius:20px;font-weight:600;">MINIMAL</div>
+      </div>
+      <div class="p-5">
+        <h3 class="font-bold text-white text-base mb-1">Minimal</h3>
+        <p class="text-xs mb-4" style="color:#94a3b8;">Clean whitespace design, perfect for corporate and finance roles.</p>
+        <div class="flex gap-2">
+          <span class="chip chip-blue">ATS Friendly</span>
+          <span class="chip chip-amber">Clean</span>
+        </div>
+        <button class="btn-primary w-full mt-4" onclick="selectTemplate('minimal')">Use Template</button>
+      </div>
+    </div>
+
+    <!-- ATS Professional -->
+    <div class="glass template-card cursor-pointer hover:border-green-500 transition-all fade-in" data-template="ats_professional" style="border-radius:16px;border:2px solid rgba(34,197,94,0.15);overflow:hidden;animation-delay:0.2s;">
+      <div style="height:220px;background:linear-gradient(135deg,#0a2e1a 0%,#134d2e 100%);position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:16px;background:white;border-radius:8px;padding:14px;font-size:6px;color:#111;line-height:1.4;overflow:hidden;">
+          <div style="text-align:center;margin-bottom:5px;">
+            <div style="font-weight:800;font-size:11px;color:#16a34a;">JANE DOE</div>
+            <div style="color:#555;font-size:7px;">Full Stack Developer</div>
+            <div style="color:#888;font-size:6px;">jane@email.com · +1234567</div>
+          </div>
+          <div style="border-bottom:2px solid #16a34a;margin-bottom:4px;"></div>
+          <div style="font-weight:700;font-size:7px;color:#16a34a;text-transform:uppercase;margin-bottom:2px;">Professional Summary</div>
+          <div style="font-size:6px;margin-bottom:5px;">Experienced developer with 5+ years…</div>
+          <div style="font-weight:700;font-size:7px;color:#16a34a;text-transform:uppercase;margin-bottom:2px;">Skills</div>
+          <div style="font-size:6px;">Python • Django • React • AWS • Docker</div>
+        </div>
+        <div style="position:absolute;bottom:12px;right:12px;background:rgba(22,163,74,0.9);color:white;font-size:9px;padding:4px 10px;border-radius:20px;font-weight:600;">ATS PRO</div>
+      </div>
+      <div class="p-5">
+        <h3 class="font-bold text-white text-base mb-1">ATS Professional</h3>
+        <p class="text-xs mb-4" style="color:#94a3b8;">Optimised for ATS scanners. Maximum keyword visibility.</p>
+        <div class="flex gap-2">
+          <span class="chip chip-green">Best ATS Score</span>
+        </div>
+        <button class="btn-primary w-full mt-4" onclick="selectTemplate('ats_professional')">Use Template</button>
+      </div>
+    </div>
+
+    <!-- Two-Column -->
+    <div class="glass template-card cursor-pointer hover:border-sky-500 transition-all fade-in" data-template="two_column" style="border-radius:16px;border:2px solid rgba(56,189,248,0.15);overflow:hidden;animation-delay:0.3s;">
+      <div style="height:220px;background:linear-gradient(135deg,#0c2233 0%,#0f3652 100%);position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:16px;background:white;border-radius:8px;overflow:hidden;font-size:6px;line-height:1.4;display:flex;">
+          <div style="width:35%;background:#0ea5e9;padding:10px 6px;color:white;">
+            <div style="font-weight:700;font-size:8px;margin-bottom:4px;">JANE</div>
+            <div style="font-weight:700;font-size:8px;margin-bottom:8px;">DOE</div>
+            <div style="font-size:6px;margin-bottom:8px;color:#bae6fd;">Full Stack Dev</div>
+            <div style="font-weight:600;font-size:6.5px;border-bottom:1px solid rgba(255,255,255,0.3);margin-bottom:3px;">SKILLS</div>
+            <div style="font-size:6px;">React<br/>Python<br/>Docker<br/>AWS</div>
+          </div>
+          <div style="flex:1;padding:10px 8px;color:#111;">
+            <div style="font-weight:700;font-size:7px;color:#0ea5e9;margin-bottom:2px;">EXPERIENCE</div>
+            <div style="font-weight:600;font-size:6.5px;">Senior Developer</div>
+            <div style="font-size:6px;color:#888;">TechCorp · 2022–Now</div>
+            <div style="font-size:6px;margin-top:2px;">Led team of 5 engineers…</div>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:12px;right:12px;background:rgba(14,165,233,0.9);color:white;font-size:9px;padding:4px 10px;border-radius:20px;font-weight:600;">2-COLUMN</div>
+      </div>
+      <div class="p-5">
+        <h3 class="font-bold text-white text-base mb-1">Two-Column Technical</h3>
+        <p class="text-xs mb-4" style="color:#94a3b8;">Side panel for skills + contact. Great for technical and senior roles.</p>
+        <div class="flex gap-2">
+          <span class="chip chip-blue">Technical</span>
+          <span class="chip chip-amber">Eye-Catching</span>
+        </div>
+        <button class="btn-primary w-full mt-4" onclick="selectTemplate('two_column')">Use Template</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/api.js"></script>
+<script>
+function selectTemplate(name) {
+  localStorage.setItem('selectedTemplate', name);
+  showToast('Template selected! Opening builder…', 'success');
+  setTimeout(() => { window.location.href = 'builder.html'; }, 800);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual Environment ───────────────────────────────────
+venv/
+env/
+.venv/
+ENV/
+
+# ── Django ────────────────────────────────────────────────
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# ── Environment Variables (NEVER commit these!) ───────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── Database migrations (keep these, so this is empty) ────
+# apps/*/migrations/*.py   <-- we DO commit migrations
+
+# ── VS Code ───────────────────────────────────────────────
+.vscode/settings.json
+
+# ── PyCharm ───────────────────────────────────────────────
+.idea/
+
+# ── OS files ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Node (not used but just in case) ──────────────────────
+node_modules/
+npm-debug.log
+
+# ── Coverage / Testing ────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
